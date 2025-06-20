@@ -28,3 +28,28 @@ functions:
           method: post
           cors: true
           integration: lambda
+
+###### TAREA
+  crear_directorio:
+    handler: crear_directorio.lambda_handler
+    events:
+      - http:
+          path: /s3/folder
+          method: post
+          cors: true
+
+  subir_archivo_base64:
+    handler: subir_base64.lambda_handler
+    events:
+      - http:
+          path: /s3/upload
+          method: post
+          cors: true
+
+
+resources:
+  Resources:
+    MyS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: my-s3rrh-bucket-${sls:stage}-${aws:accountId}
